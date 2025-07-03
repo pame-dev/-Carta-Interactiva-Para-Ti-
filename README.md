@@ -28,7 +28,7 @@ Este proyecto busca demostrar que el código también puede transmitir emociones
 
 ## 🚀 Ver en línea
 
-🔗 [Haz clic aquí para ver la carta desplegar su magia](https://github.com/pame-dev/-Carta-Interactiva-Para-Ti-?tab=readme-ov-file)  
+🔗 [Haz clic aquí para ver la carta desplegar su magia](https://cumpleminino.netlify.app/)  
 _(Reemplaza con tu enlace real de Netlify)_
 
 ---
