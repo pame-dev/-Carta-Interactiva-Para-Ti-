@@ -29,7 +29,6 @@ Este proyecto busca demostrar que el código también puede transmitir emociones
 ## 🚀 Ver en línea
 
 🔗 [Haz clic aquí para ver la carta desplegar su magia](https://cumpleminino.netlify.app/)  
-_(Reemplaza con tu enlace real de Netlify)_
 
 ---
 
