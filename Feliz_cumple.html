@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti ❤️</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>❤️</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #ff6b6b;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form {
+            display: block;
+        }
+
+        .login-form.hidden {
+            display: none;
+        }
+
+        .content {
+            display: none;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .content.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lock-container {
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lock-icon {
+            font-size: 60px;
+            color: #667eea;
+            margin-bottom: 20px;
+            animation: lockPulse 2s infinite;
+        }
+
+        @keyframes lockPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .lock-icon.unlocked {
+            color: #4CAF50;
+            animation: unlockBounce 0.6s ease-out;
+        }
+
+        @keyframes unlockBounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .digit-display {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .digit-box {
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(145deg, #f0f0f0, #d1d1d1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 
+                inset 5px 5px 10px #bebebe,
+                inset -5px -5px 10px #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .digit-box.filled {
+            background: linear-gradient(145deg, #667eea, #5a6fd8);
+            color: white;
+            box-shadow: 
+                inset 5px 5px 10px #5a6fd8,
+                inset -5px -5px 10px #7289f4;
+        }
+
+        .digit-box.error {
+            background: linear-gradient(145deg, #ff6b6b, #ff5252);
+            color: white;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+
+        .key {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 
+                5px 5px 10px #d1d1d1,
+                -5px -5px 10px #ffffff;
+        }
+
+        .key:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                7px 7px 15px #d1d1d1,
+                -7px -7px 15px #ffffff;
+        }
+
+        .key:active {
+            transform: translateY(1px);
+            box-shadow: 
+                2px 2px 5px #d1d1d1,
+                -2px -2px 5px #ffffff;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .clear-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .romantic-image {
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .romantic-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .romantic-image {
+                max-width: 200px;
+                height: 260px;
+            }
+        }
+
+        .romantic-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+            margin: 20px 0;
+            text-align: left;
+            background: linear-gradient(45deg, #ff6b6b, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .error-message {
+            color: #ff4757;
+            margin-top: 15px;
+            font-size: 14px;
+            animation: fadeInError 0.3s ease-out;
+        }
+
+        @keyframes fadeInError {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            color: rgba(255, 107, 107, 0.7);
+            animation: float 3s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hint {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hearts">💕</div>
+        
+        <div class="login-form" id="loginForm">
+            <h1>Solo para ti, mi amor</h1>
+            <p class="hint">Ingresa el código secreto de 4 dígitos</p>
+            
+            <div class="lock-container">
+                <div class="lock-icon" id="lockIcon">🔒</div>
+                <div class="digit-display">
+                    <div class="digit-box" id="digit1">-</div>
+                    <div class="digit-box" id="digit2">-</div>
+                    <div class="digit-box" id="digit3">-</div>
+                    <div class="digit-box" id="digit4">-</div>
+                </div>
+            </div>
+
+            <div class="keypad">
+                <button class="key" onclick="addDigit('1')">1</button>
+                <button class="key" onclick="addDigit('2')">2</button>
+                <button class="key" onclick="addDigit('3')">3</button>
+                <button class="key" onclick="addDigit('4')">4</button>
+                <button class="key" onclick="addDigit('5')">5</button>
+                <button class="key" onclick="addDigit('6')">6</button>
+                <button class="key" onclick="addDigit('7')">7</button>
+                <button class="key" onclick="addDigit('8')">8</button>
+                <button class="key" onclick="addDigit('9')">9</button>
+                <div></div>
+                <button class="key" onclick="addDigit('0')">0</button>
+                <div></div>
+            </div>
+
+            <div class="control-buttons">
+                <button class="control-btn clear-btn" onclick="clearCode()">Borrar</button>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+
+        <div class="content" id="content">
+            <h1>¡Mi amor! 💖</h1>
+            <a href="https://open.spotify.com/playlist/48TYvKZ0O9h5YczUM8uvtq" target="_blank">
+                <img src="/nosotros.jpeg" alt="Imagen romántica" class="romantic-image">
+            </a>
+            <div class="romantic-text">
+                <p>Eres la luz que ilumina mis días y la razón de mi sonrisa. Cada momento contigo es un regalo que atesoro en mi corazón.</p>
+                <br>
+                <p>Tu amor ha transformado mi mundo en un lugar más hermoso y lleno de color. Gracias por ser mi compañero de vida, mi mejor amigo y mi gran amor.</p>
+                <br>
+                <p style="text-align: center; font-weight: bold;">Te amo más de lo que las palabras pueden expresar ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const CORRECT_CODE = "2704";
+        
+        let currentCode = "";
+        let currentPosition = 1;
+
+        function addDigit(digit) {
+            if (currentCode.length < 4) {
+                currentCode += digit;
+                updateDisplay();
+                
+                if (currentCode.length === 4) {
+                    setTimeout(checkCode, 500);
+                }
+            }
+        }
+
+        function updateDisplay() {
+            for (let i = 1; i <= 4; i++) {
+                const digitBox = document.getElementById(`digit${i}`);
+                if (i <= currentCode.length) {
+                    digitBox.textContent = currentCode[i-1];
+                    digitBox.classList.add('filled');
+                } else {
+                    digitBox.textContent = '-';
+                    digitBox.classList.remove('filled');
+                }
+                digitBox.classList.remove('error');
+            }
+        }
+
+        function clearCode() {
+            currentCode = "";
+            currentPosition = 1;
+            updateDisplay();
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function checkCode() {
+            const errorMessage = document.getElementById('errorMessage');
+            const lockIcon = document.getElementById('lockIcon');
+            
+            if (currentCode === CORRECT_CODE) {
+                // Código correcto
+                lockIcon.textContent = '🔓';
+                lockIcon.classList.add('unlocked');
+                
+                setTimeout(() => {
+                    document.getElementById('loginForm').classList.add('hidden');
+                    document.getElementById('content').classList.add('show');
+                    createFloatingHearts();
+                }, 1000);
+                
+            } else {
+                // Código incorrecto
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(`digit${i}`).classList.add('error');
+                }
+                
+                errorMessage.textContent = "Código incorrecto. ¡Inténtalo de nuevo!";
+                errorMessage.style.display = "block";
+                
+                setTimeout(() => {
+                    clearCode();
+                }, 1500);
+            }
+        }
+
+        function createFloatingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-hearts';
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 800);
+        }
+
+        // Soporte para teclado físico
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '0' && e.key <= '9') {
+                addDigit(e.key);
+            } else if (e.key === 'Backspace' || e.key === 'Delete') {
+                clearCode();
+            }
+        });
+    </script>
+</body>
+</html>
