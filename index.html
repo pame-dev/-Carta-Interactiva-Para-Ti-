@@ -404,6 +404,7 @@
         }
 
         function checkCode() {
+            
             const errorMessage = document.getElementById('errorMessage');
             const lockIcon = document.getElementById('lockIcon');
             
@@ -411,6 +412,8 @@
                 // Código correcto
                 lockIcon.textContent = '🔓';
                 lockIcon.classList.add('unlocked');
+                
+                document.getElementById('bgMusic').play();
                 
                 setTimeout(() => {
                     document.getElementById('loginForm').classList.add('hidden');
@@ -457,5 +460,9 @@
             }
         });
     </script>
+    <audio id="bgMusic" loop>
+      <source src="cancion.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
 </body>
 </html>
